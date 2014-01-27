@@ -1,0 +1,70 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Set up repositories to use for packages
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'package)
+(add-to-list 'package-archives
+'("melpa" . "http://melpa.milkbox.net/packages/") t)
+;;; Start doing package junk?
+(package-initialize)
+;;; Evil mode Package
+(setq evil-want-C-u-scroll t)
+(require 'evil)
+(evil-mode 1) 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Line Numbering 
+;;; Note: could this bee done simpler?
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(global-linum-mode 1)       ;;;use line numbers everywhere
+(require 'linum-relative)   ;;;use relative line numbers package
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Color Scheme / Theme
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(load-theme 'solarized-light t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Turn Off Bell
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq ring-bell-function 'ignore)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Set Font
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-12"))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Set up load path
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; (add-to-list 'load-path "~/.emacs.d/elisp/")
+(elscreen-start)
+(define-key evil-normal-state-map (kbd "C-w t") 'elscreen-create) ;creat tab
+(define-key evil-normal-state-map (kbd "C-w x") 'elscreen-kill) ;kill tab
+(define-key evil-normal-state-map "gT" 'elscreen-previous) ;previous tab
+(define-key evil-normal-state-map "gt" 'elscreen-next) ;next tab
+
+(evil-ex-define-cmd "tabnew" 'elscreen-create)
+(evil-ex-define-cmd "tabedit" "tabnew")
+(evil-ex-define-cmd "tabe" "tabedit")
+;(evil-ex-define-cmd "tabfind" 'evil-elscreen/tab-find)
+;(evil-ex-define-cmd "tabf" "tabfind")
+(evil-ex-define-cmd "tabclose" 'elscreen-kill)
+(evil-ex-define-cmd "tabc" "tabclose")
+;(evil-ex-define-cmd "tabclose!" 'evil-elscreen/tab-close-f)
+;(evil-ex-define-cmd "tabc!" "tabclose!")
+
+(evil-ex-define-cmd "tabonly" 'elscreen-kill-others)
+(evil-ex-define-cmd "tabo" "tabonly")
+
+;(evil-ex-define-cmd "tabonly!" 'evil-elscreen/tab-close-other-f)
+;(evil-ex-define-cmd "tabo!" "tabonly!")
+
+
+(evil-ex-define-cmd "tabnext" ' elscreen-next)
+(evil-ex-define-cmd "tabn" "tabnext")
+(evil-ex-define-cmd "tabprevious" 'elscreen-previous)
+(evil-ex-define-cmd "tabp" "tabprevious")
+(evil-ex-define-cmd "tabNext" "tabprevious")
+(evil-ex-define-cmd "tabN" "tabprevious")
+;;; (require 'evil-elscreen)
